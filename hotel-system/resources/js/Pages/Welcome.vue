@@ -8,6 +8,7 @@ import GlassBridge from '@/Components/GlassBridge.vue';
 import LocationSection from '@/Components/LocationSection.vue';
 import HotelFacilities from '@/Components/HotelFacilities.vue';
 
+
 defineProps({
     packages: Array
 });
