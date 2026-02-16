@@ -6,6 +6,7 @@ import BookingBar from '@/Components/BookingBar.vue';
 import PackageCard from '@/Components/PackageCard.vue';
 import GlassBridge from '@/Components/GlassBridge.vue';
 import LocationSection from '@/Components/LocationSection.vue';
+import HotelFacilities from '@/Components/HotelFacilities.vue';
 
 defineProps({
     packages: Array
@@ -36,6 +37,7 @@ defineProps({
                 </div>
             </div>
         </section>
+        <HotelFacilities />
 
         <GlassBridge />
 
