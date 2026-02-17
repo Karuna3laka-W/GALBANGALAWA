@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Dashboard
+    Route::get('/dashboard', [PackageController::class, 'index'])->name('dashboard');
+
+    // Package Management - Named routes for Ziggy
+    Route::post('/admin/packages', [PackageController::class, 'store'])->name('admin.packages.store');
+    Route::put('/admin/packages/{package}', [PackageController::class, 'update'])->name('admin.packages.update');
+    Route::delete('/admin/packages/{package}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');
+});
+
+
 // 1. Combined Home Route: Sends auth status AND packages
 Route::get('/', function () {
     return Inertia::render('Welcome', [
