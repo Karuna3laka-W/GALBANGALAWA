@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@splidejs/splide-extension-grid": "^0.4.1",
+    "@splidejs/vue-splide": "^0.6.12"
+  }
+}

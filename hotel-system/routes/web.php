@@ -15,7 +15,8 @@ Route::get('/', function () {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        'packages' => Package::all(), 
+        // 'packages' => Package::all(), 
+        'packages' => Package::where('is_active', true)->latest()->get(),
     ]);
 });
 
