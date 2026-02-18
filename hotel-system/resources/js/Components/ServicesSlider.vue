@@ -1,46 +1,22 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
-const services = [
-    {
-        id: 1,
-        subtitle: "Elegant Celebrations",
-        title: "Weddings",
-        image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-        id: 2,
-        subtitle: "Joyful Moments",
-        title: "Birthdays",
-        image: "https://images.unsplash.com/photo-1530103862676-de3c9de59a9e?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-        id: 3,
-        subtitle: "Corporate Excellence",
-        title: "Office Functions",
-        image: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-        id: 4,
-        subtitle: "Escape The City",
-        title: "Day Outings",
-        image: "https://images.unsplash.com/photo-1533759413974-9e15f3b745ac?q=80&w=800&auto=format&fit=crop"
-    },
-    {
-        id: 5,
-        subtitle: "Intimate Gatherings",
-        title: "Private Dining",
-        image: "https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=800&auto=format&fit=crop"
+// Accept the services from the database!
+const props = defineProps({
+    services: {
+        type: Array,
+        required: true
     }
-];
+});
 
-// 1. State for the Active Card
 const activeIndex = ref(0);
 let autoPlayInterval = null;
 
-// 2. The Math to make it rotate like a clock
+// Only calculate style if services exist
 const getCardStyle = (index) => {
-    const total = services.length;
+    if (!props.services || props.services.length === 0) return {};
+    
+    const total = props.services.length;
     let diff = (index - activeIndex.value + total) % total;
     
     if (diff > Math.floor(total / 2)) {
@@ -61,9 +37,10 @@ const getCardStyle = (index) => {
     };
 };
 
-// 3. Carousel Controls
 const nextCard = () => {
-    activeIndex.value = (activeIndex.value + 1) % services.length;
+    if(props.services.length > 0) {
+        activeIndex.value = (activeIndex.value + 1) % props.services.length;
+    }
 };
 
 const selectCard = (index) => {
@@ -71,11 +48,10 @@ const selectCard = (index) => {
     resetAutoPlay(); 
 };
 
-// 4. Auto-Play Logic
 const startAutoPlay = () => {
-    autoPlayInterval = setInterval(() => {
-        nextCard();
-    }, 3500); 
+    if(props.services.length > 0) {
+        autoPlayInterval = setInterval(() => { nextCard(); }, 3500); 
+    }
 };
 
 const resetAutoPlay = () => {
@@ -83,18 +59,12 @@ const resetAutoPlay = () => {
     startAutoPlay();
 };
 
-// Lifecycle Hooks
-onMounted(() => {
-    startAutoPlay();
-});
-
-onUnmounted(() => {
-    clearInterval(autoPlayInterval);
-});
+onMounted(() => { startAutoPlay(); });
+onUnmounted(() => { clearInterval(autoPlayInterval); });
 </script>
 
 <template>
-    <section class="py-24 bg-white relative overflow-hidden">
+    <section v-if="services && services.length > 0" class="py-24 bg-white relative overflow-hidden">
         
         <div class="max-w-7xl mx-auto px-6 mb-16 text-center relative z-20">
             <span class="text-[#d4a373] text-[10px] font-black uppercase tracking-[0.5em] block mb-4">Experiences</span>
@@ -110,7 +80,7 @@ onUnmounted(() => {
                 :style="getCardStyle(index)"
                 @click="selectCard(index)"
             >
-                <img :src="service.image" :alt="service.title" class="card-image" loading="lazy" />
+                <img :src="`/storage/${service.image_path}`" :alt="service.title" class="card-image" loading="lazy" />
                 
                 <div class="card-overlay" :class="{'opacity-90': activeIndex !== index, 'opacity-70': activeIndex === index}"></div>
 
@@ -132,8 +102,7 @@ onUnmounted(() => {
                 class="h-2 rounded-full transition-all duration-500"
                 :class="activeIndex === index ? 'w-8 bg-[#d4a373]' : 'w-2 bg-gray-200 hover:bg-gray-300'" 
             ></button>
-            </div>
-
+        </div>
     </section>
 </template>
 

@@ -16,7 +16,8 @@ import ServicesSlider from '@/Components/ServicesSlider.vue';
 
 defineProps({
     packages: Array,
-    specialOffer: Object
+    specialOffer: Object,
+    services: Array
 });
 </script>
 
@@ -34,7 +35,7 @@ defineProps({
             
             <BookingBar />
 
-            <ServicesSlider />
+            <ServicesSlider :services="services" />
 
             <PackageSection :packages="packages" />
 
