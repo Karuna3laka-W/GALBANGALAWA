@@ -42,10 +42,10 @@ defineProps({
                     </div>
                     <span class="font-bold text-xs uppercase tracking-widest text-white/50">Standard</span>
                 </div>
-                <div>
+                <!-- <div>
                     <h3 class="font-bold text-2xl text-white tracking-tight">Sapphire</h3>
                     <p class="text-[10px] uppercase font-bold text-white/50 tracking-widest mt-1">Gift Card</p>
-                </div>
+                </div> -->
             </div>
 
             <div class="absolute z-10 w-[240px] h-[340px] bg-gradient-to-br from-[#333333] to-[#111111] rounded-3xl shadow-2xl transition-all duration-500 hover:-translate-y-8 hover:rotate-[5deg] hover:z-30 left-1/2 ml-[20px] bottom-16 rotate-12 border border-white/10 p-6 flex flex-col justify-between cursor-pointer">
@@ -56,10 +56,10 @@ defineProps({
                     </div>
                     <span class="font-bold text-xs uppercase tracking-widest text-white/50">Exclusive</span>
                 </div>
-                <div>
+                <!-- <div>
                     <h3 class="font-bold text-2xl text-white tracking-tight">Obsidian</h3>
                     <p class="text-[10px] uppercase font-bold text-white/50 tracking-widest mt-1">Gift Card</p>
-                </div>
+                </div> -->
             </div>
 
             <div class="absolute z-20 w-[260px] h-[360px] rounded-3xl shadow-[0_30px_60px_rgba(0,0,0,0.6)] transition-all duration-500 hover:-translate-y-10 left-1/2 ml-[-130px] bottom-20 border border-white/40 p-6 flex flex-col justify-between dynamic-card cursor-pointer">

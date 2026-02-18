@@ -11,6 +11,7 @@ import LocationSection from '@/Components/LocationSection.vue';
 import BottomBar from '@/Components/BottomBar.vue'; 
 import PackageSection from '@/Components/PackageSection.vue';
 import SeasonalOffer from '@/Components/SeasonalOffer.vue';
+import ServicesSlider from '@/Components/ServicesSlider.vue';
  // Ensure this is imported
 
 defineProps({
@@ -32,6 +33,8 @@ defineProps({
             <Hero />
             
             <BookingBar />
+
+            <ServicesSlider />
 
             <PackageSection :packages="packages" />
 
