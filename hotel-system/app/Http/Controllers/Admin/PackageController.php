@@ -29,7 +29,9 @@ public function index()
         // This fetches EVERYTHING. If it returns 0, your DB is empty.
         return Inertia::render('Admin/Dashboard', [
             'packages' => Package::latest()->get(),
+            'seasonalOffers' => \App\Models\SeasonalOffer::latest()->get(),
         ]);
+        
     }
 
    public function store(Request $request)

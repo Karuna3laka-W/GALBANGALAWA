@@ -10,10 +10,12 @@ import GlassBridge from '@/Components/GlassBridge.vue';
 import LocationSection from '@/Components/LocationSection.vue';
 import BottomBar from '@/Components/BottomBar.vue'; 
 import PackageSection from '@/Components/PackageSection.vue';
+import SeasonalOffer from '@/Components/SeasonalOffer.vue';
  // Ensure this is imported
 
 defineProps({
-    packages: Array
+    packages: Array,
+    specialOffer: Object
 });
 </script>
 
@@ -32,6 +34,8 @@ defineProps({
             <BookingBar />
 
             <PackageSection :packages="packages" />
+
+            <SeasonalOffer :offer="specialOffer" />
 
             <PhotoGrid />
 

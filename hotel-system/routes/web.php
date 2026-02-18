@@ -2,33 +2,27 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\SeasonalOfferController;
 use App\Models\Package;
+use App\Models\SeasonalOffer;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    // Dashboard
-    Route::get('/dashboard', [PackageController::class, 'index'])->name('dashboard');
-
-    // Package Management - Named routes for Ziggy
-    Route::post('/admin/packages', [PackageController::class, 'store'])->name('admin.packages.store');
-    Route::put('/admin/packages/{package}', [PackageController::class, 'update'])->name('admin.packages.update');
-    Route::delete('/admin/packages/{package}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');
-});
-
-
-// 1. Combined Home Route: Sends auth status AND packages
+// 1. Combined Home Route: Sends auth status, packages, AND Seasonal Offers
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
-        // 'packages' => Package::all(), 
+        
+        // Fetch active packages
         'packages' => Package::where('is_active', true)->latest()->get(),
+        
+        // THE FIX: Fetch the ONE active seasonal offer and send it to Vue
+        'specialOffer' => SeasonalOffer::where('is_active', true)->latest()->first(),
     ]);
 });
 
@@ -40,11 +34,20 @@ Route::get('/inquiry-details', function (Request $request) {
     ]);
 });
 
-// 3. Admin & Protected Routes
+// 3. Admin & Protected Routes (Consolidated into ONE clean block)
 Route::middleware(['auth', 'verified'])->group(function () {
-    // This points to your PackageController so the Admin Dashboard works
+    // Dashboard
     Route::get('/dashboard', [PackageController::class, 'index'])->name('dashboard');
-    Route::patch('/admin/packages/{package}', [PackageController::class, 'updatePrice'])->name('admin.packages.update');
+
+    // Package Management
+    Route::post('/admin/packages', [PackageController::class, 'store'])->name('admin.packages.store');
+    Route::put('/admin/packages/{package}', [PackageController::class, 'update'])->name('admin.packages.update');
+    Route::delete('/admin/packages/{package}', [PackageController::class, 'destroy'])->name('admin.packages.destroy');
+
+    // Seasonal Offer Management
+    Route::post('/admin/seasonal-offers', [SeasonalOfferController::class, 'store'])->name('admin.offers.store');
+    Route::put('/admin/seasonal-offers/{offer}', [SeasonalOfferController::class, 'update'])->name('admin.offers.update');
+    Route::delete('/admin/seasonal-offers/{offer}', [SeasonalOfferController::class, 'destroy'])->name('admin.offers.destroy');
 });
 
 // 4. User Profile Routes (Breeze defaults)
