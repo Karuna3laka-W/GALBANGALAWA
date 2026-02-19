@@ -28,15 +28,18 @@ class SeasonalOfferController extends Controller
         return back()->with('message', 'Seasonal offer published!');
     }
 
-    public function update(Request $request, SeasonalOffer $offer)
+   public function update(Request $request, SeasonalOffer $offer)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'badge_text' => 'required|string|max:50',
             'description' => 'required|string',
             'is_active' => 'boolean',
-            'theme_color' => 'required|string|size:7'
+            'theme_color' => 'required|string|size:7',
         ]);
+
+
+        // dd($validated); 
 
         if ($validated['is_active'] ?? false) {
             SeasonalOffer::where('id', '!=', $offer->id)->update(['is_active' => false]);
