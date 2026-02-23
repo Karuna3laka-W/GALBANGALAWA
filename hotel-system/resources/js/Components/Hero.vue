@@ -55,9 +55,9 @@ const stopSlideshow = () => {
         
         <div class="hero-content">
             <h1 class="hero-title">
-                Lets Celebrate YOUR <br>
+                Lets Celebrate your <br>
                 Lovely day <span class="accent-text">vibrantly</span> <br>
-                wis US
+                wis uss
             </h1>
             
             <div class="hero-actions">
