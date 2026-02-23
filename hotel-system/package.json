@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@splidejs/splide": "^4.1.4",
+        "@splidejs/splide-extension-grid": "^0.4.1",
         "@splidejs/vue-splide": "^0.6.12",
         "gsap": "^3.14.2"
     }
