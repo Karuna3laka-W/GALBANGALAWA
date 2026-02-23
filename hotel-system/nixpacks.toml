@@ -1,11 +1,16 @@
 [phases.setup]
 nixPkgs = ['php82', 'php82Packages.composer', 'nodejs_22']
 
-[phases.build]
+[phases.install]
 dependsOn = ['setup']
 cmds = [
     'composer install --no-dev',
-    'npm install --legacy-peer-deps',
+    'npm install --legacy-peer-deps'
+]
+
+[phases.build]
+dependsOn = ['install']
+cmds = [
     'npm run build',
     'mkdir -p database',
     'touch database/database.sqlite',
