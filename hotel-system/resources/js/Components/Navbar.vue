@@ -3,120 +3,89 @@ import { ref } from 'vue';
 import { Link } from '@inertiajs/vue3';
 
 const isOpen = ref(false);
-
-const closeMenu = () => {
-    isOpen.value = false;
-};
 </script>
 
 <template>
     <nav class="fixed top-0 left-0 w-full z-50 glass-nav">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center relative">
+        <div class="max-w-[1800px] mx-auto px-10 py-4 flex justify-between items-center">
             
-            <a href="/" class="flex items-center gap-3 group z-50">
-                <div class="w-10 h-10 rounded-full bg-[#d4a373] flex items-center justify-center text-[#001a2c] font-black font-serif italic text-xl group-hover:scale-105 transition-transform duration-500">
-                    G
-                </div>
-                <span class="text-white font-serif italic text-2xl tracking-wide group-hover:text-[#d4a373] transition-colors duration-500">
-                    Galbangalawa
-                </span>
-            </a>
-
-            <button 
-                @click="isOpen = !isOpen" 
-                class="hamburger-btn z-50"
-                aria-label="Toggle Menu"
-            >
-                <span class="material-icons-outlined text-3xl transition-transform duration-500" :class="{ 'rotate-90 opacity-0 absolute': isOpen, 'rotate-0 opacity-100': !isOpen }">
-                    menu
-                </span>
-                <span class="material-icons-outlined text-3xl transition-transform duration-500 absolute" :class="{ 'rotate-0 opacity-100': isOpen, '-rotate-90 opacity-0': !isOpen }">
-                    close
-                </span>
+            <button @click="isOpen = !isOpen" class="pill-btn group">
+                <span class="material-icons-outlined text-xl">menu</span>
+                <span class="uppercase text-xs tracking-widest font-bold">Menu</span>
             </button>
 
-            <transition name="menu-fade">
-                <div v-if="isOpen" class="dropdown-panel">
-                    <div class="flex flex-col py-4">
-                        
-                        <a href="#packages" @click="closeMenu" class="luxury-link">
-                            Packages
-                        </a>
-                        
-                        <a href="#gallery" @click="closeMenu" class="luxury-link">
-                            Gallery
-                        </a>
-                        
-                        <a href="#location" @click="closeMenu" class="luxury-link">
-                            Location
-                        </a>
-                        
-                        <a href="#contact" @click="closeMenu" class="luxury-link">
-                            Contact Us
-                        </a>
+   
 
-                        <div class="divider-line"></div>
+            <button class="pill-btn group">
+                <span class="uppercase text-xs tracking-widest font-bold">Booking</span>
+                <span class="material-icons-outlined text-xl">shopping_bag</span>
+            </button>
+        </div>
 
-                        <Link :href="route('dashboard')" @click="closeMenu" class="admin-link">
-                            Admin Login
-                        </Link>
+        <div class="w-full h-[1px] bg-white/10"></div>
 
-                    </div>
-                </div>
-            </transition>
-
+        <div class="flex justify-center items-center py-5 gap-12">
+            <a href="#" class="nav-link">About Us</a>
+            <a href="#" class="nav-link">Rooms</a>
+            <a href="#" class="nav-link">Weddings</a>
+            <a href="#" class="nav-link">Events</a>
+            <a href="#" class="nav-link">Contact</a>
         </div>
     </nav>
 </template>
 
 <style scoped>
-/* Main Navbar Glassmorphism */
 .glass-nav {
-    background: rgba(0, 26, 44, 0.75); 
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(212, 163, 115, 0.15);
+    /* The specific dark teal/blue from your image */
+    background: rgba(12, 66, 80, 0.95); 
+    backdrop-filter: blur(10px);
 }
 
-/* Hamburger Button */
-.hamburger-btn {
-    @apply w-12 h-12 flex items-center justify-center text-[#d4a373] rounded-full hover:bg-white/10 transition-all duration-300;
+/* Pill Buttons (Menu & Booking) */
+.pill-btn {
+    @apply flex items-center gap-4 px-8 py-3 bg-[#0a1a23] text-white rounded-full 
+           border border-white/5 transition-all duration-300 hover:bg-[#1a2c38];
 }
 
-/* RESPONSIVE DROPDOWN PANEL 
-  Mobile: Stretches across the screen with margins.
-  Desktop (md+): Becomes a neat 18rem (288px) box anchored to the right.
-*/
-.dropdown-panel {
-    @apply fixed top-[85px] left-4 right-4 md:left-auto md:w-72 
-           bg-[#001a2c]/95 backdrop-blur-2xl border border-[#d4a373]/30 
-           rounded-2xl shadow-2xl overflow-hidden z-40;
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+/* Centered Logo container */
+.logo-circle {
+    @apply w-16 h-16 rounded-full border border-white/40 flex items-center justify-center;
 }
 
-/* Luxury Link Styling (No Icons, Focus on Typography & Hover) */
-.luxury-link {
-    @apply px-8 py-4 text-white font-serif italic text-xl tracking-wide 
-           transition-all duration-300 hover:text-[#d4a373] hover:bg-white/5 hover:pl-10;
+/* Bottom Nav Links */
+.nav-link {
+    @apply text-white text-[11px] font-bold uppercase tracking-[0.25em] 
+           transition-opacity duration-300 hover:opacity-60;
 }
 
-/* Gold Divider */
-.divider-line {
-    @apply h-[1px] bg-gradient-to-r from-transparent via-[#d4a373]/40 to-transparent my-2 mx-4;
+/* Material Icon adjustments to match image size */
+.material-icons-outlined, .material-icons {
+    font-size: 1.2rem;
+}
+/* Ensure the icon font is actually applied */
+.material-icons-outlined {
+    font-family: 'Material Icons Outlined';
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    white-space: nowrap;
 }
 
-/* Admin Login Button Styling */
-.admin-link {
-    @apply mx-4 mt-2 mb-2 px-4 py-3 text-center rounded-xl border border-[#d4a373]/50 
-           text-[#d4a373] font-black uppercase text-[11px] tracking-[0.3em] 
-           transition-all duration-300 hover:bg-[#d4a373] hover:text-[#001a2c];
+.pill-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Adds space between icon and text */
+    padding: 10px 24px;
+    background: #061922; /* Very dark blue-black */
+    border-radius: 999px;
+    color: white;
+    transition: all 0.3s ease;
 }
 
-/* Smooth Fade & Slide Animation */
-.menu-fade-enter-active, .menu-fade-leave-active {
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.menu-fade-enter-from, .menu-fade-leave-to {
-    opacity: 0;
-    transform: translateY(-20px) scale(0.98);
+/* Tracking makes the text look high-end */
+.pill-btn span:last-child {
+    letter-spacing: 0.15em;
+    font-size: 11px;
 }
 </style>

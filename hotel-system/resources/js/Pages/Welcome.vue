@@ -12,7 +12,8 @@ import BottomBar from '@/Components/BottomBar.vue';
 import PackageSection from '@/Components/PackageSection.vue';
 import SeasonalOffer from '@/Components/SeasonalOffer.vue';
 import ServicesSlider from '@/Components/ServicesSlider.vue';
- // Ensure this is imported
+
+import WeddingSection from '@/Components/WeddingSection.vue';
 
 defineProps({
     packages: Array,
@@ -23,6 +24,7 @@ defineProps({
 
 <template>
     <Head title="Hotel Galbangalawa" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
     <div class="min-h-screen text-[#001a2c] font-sans relative flex flex-col">
         
@@ -36,6 +38,8 @@ defineProps({
             <BookingBar />
 
             <ServicesSlider :services="services" />
+
+            <WeddingSection />
 
             <PackageSection :packages="packages" />
 
@@ -54,13 +58,13 @@ defineProps({
 </template>
 
 <style>
-/* Global smooth scrolling for anchor links like #packages */
 html {
     scroll-behavior: smooth;
 }
 
-/* Ensure the bluish shades don't cause horizontal overflow */
 body {
     overflow-x: hidden;
+    /* Adding a background color that matches the dark luxury theme */
+    background-color: #001a2c;
 }
 </style>

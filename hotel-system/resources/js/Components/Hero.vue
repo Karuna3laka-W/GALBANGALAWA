@@ -2,36 +2,31 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 import gsap from 'gsap';
 
-// 1. Define your luxury image slides here
 const slides = [
-    'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=1470', // Your original image
-    'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1470', // Luxury hotel exterior
-    'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1470'  // High-end resort pool
+    'https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=1470', // Spa water
+    'https://images.unsplash.com/photo-1532712938310-34cb3982ef74?q=80&w=1470', 
+    'https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=1470'
 ];
 
 const currentSlide = ref(0);
 let slideInterval = null;
 
 onMounted(() => {
-    // GSAP Text Animations (Kept exactly as you had them)
     const tl = gsap.timeline();
-    tl.from(".hero-title", { y: 60, opacity: 0, duration: 1.2, ease: "expo.out", delay: 0.5 })
-      .from(".btn-primary", { opacity: 0, y: 20, duration: 0.8, ease: "power2.out" }, "-=0.5");
+    // Animating the center content
+    tl.from(".hero-top, .hero-bottom", { opacity: 0, duration: 1.5, ease: "power2.out" })
+      .from(".hero-title", { y: 40, opacity: 0, duration: 1.2, ease: "expo.out" }, "-=1")
+      .from(".hero-subtext", { opacity: 0, y: 10, duration: 1 }, "-=0.5");
 
-    // Start the 5-second slideshow timer
     startSlideshow();
 });
 
-onUnmounted(() => {
-    // Clean up timer when leaving page
-    stopSlideshow();
-});
+onUnmounted(() => stopSlideshow());
 
 const startSlideshow = () => {
     slideInterval = setInterval(() => {
-        // Increment slide index, loop back to 0 if at the end
         currentSlide.value = (currentSlide.value + 1) % slides.length;
-    }, 5000); // 5 Seconds
+    }, 6000);
 };
 
 const stopSlideshow = () => {
@@ -49,111 +44,119 @@ const stopSlideshow = () => {
                 :class="{ 'active': currentSlide === index }"
                 :style="{ backgroundImage: `url(${image})` }"
             ></div>
-            
             <div class="hero-overlay"></div>
         </div>
         
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Lets Celebrate your <br>
-                Lovely day <span class="accent-text">vibrantly</span> <br>
-                wis uss
-            </h1>
-            
-            <div class="hero-actions">
-                <button class="btn-primary">View Rooms</button>
+        <div class="hero-top">
+            <div class="logo-wrapper">
+                <span class="logo-icon"></span>
+                <h2 class="logo-text">RockHouse</h2>
+                <p class="logo-sub">WELLNESS & SPA HOTEL</p>
             </div>
         </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">Touch of the healing<br>power of nature</h1>
+            <div class="hero-subtext">
+                <p>A place you like to return to.</p>
+                <p>Welcome to one of the best hotels in LK.</p>
+            </div>
+        </div>
+
+        <div class="hero-bottom">
+            <div class="badge-tripadvisor">
+                <p>Tripadvisor Travelers' Choice Awards</p>
+                 <p>.</p>
+                
+            </div>
+        </div>
+
+        
     </header>
 </template>
 
 <style scoped>
+/* Import sophisticated fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Montserrat:wght@300;400&display=swap');
+
 .hero-container {
     position: relative;
     width: 100%;
     height: 100vh;
     display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spreads top, center, bottom */
     align-items: center;
-    justify-content: flex-start;
-    padding-left: 10%;
+    text-align: center;
+    color: white;
     overflow: hidden;
-    background-color: #000;
+    background-color: #0b242f; /* Deep teal fallback */
 }
 
-.hero-bg {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-}
-
-/* Base Style for All Slides */
+/* Background & Overlay */
 .hero-slide {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
     background-size: cover;
     background-position: center;
-    opacity: 0; /* Hidden by default */
-    transform: scale(1.1); /* Start slightly zoomed in */
-    transition: opacity 1.5s ease-in-out, transform 6s ease-out; /* Smooth Fade & Slow Zoom */
-    z-index: 1;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
 }
-
-/* Active Slide Style */
-.hero-slide.active {
-    opacity: 1; /* Visible */
-    transform: scale(1); /* Zoom out slowly to normal size */
-    z-index: 2;
-}
+.hero-slide.active { opacity: 1; z-index: 1; }
 
 .hero-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.6), transparent);
-    z-index: 10; /* Above images, below text */
+    background: rgba(11, 36, 47, 0.6); /* Teal tint wash */
+    z-index: 2;
 }
 
-.hero-content {
+/* UI Layers */
+.hero-top, .hero-content, .hero-bottom {
     position: relative;
-    z-index: 20; /* Above everything */
-    color: white;
+    z-index: 10;
 }
 
-/* Text Styles */
+/* Logo Styles */
+.hero-top { padding-top: 3rem; }
+.logo-text { font-family: 'Playfair Display', serif; letter-spacing: 0.3em; margin: 0.5rem 0; font-size: 1.5rem; }
+.logo-sub { font-size: 0.6rem; letter-spacing: 0.2em; font-family: 'Montserrat', sans-serif; }
+
+/* Main Text Styles */
 .hero-title {
-    font-family: 'Inter', sans-serif;
-    font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-}
-
-.accent-text {
     font-family: 'Playfair Display', serif;
-    font-style: italic;
-    color: #d4a373;
-    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: 2rem;
 }
 
-.btn-primary {
-    background: white;
-    color: #1e3a8a;
-    padding: 1rem 2.5rem;
-    border-radius: 9999px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.75rem;
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin-top: 2rem;
+.hero-subtext {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    letter-spacing: 0.05em;
+    opacity: 0.9;
 }
 
-.btn-primary:hover {
-    background: #d4a373; /* Gold hover */
+/* Badge & Floating Info */
+.hero-bottom { padding-bottom: 3rem; }
+.badge-tripadvisor { font-size: 0.7rem; border-top: 1px solid rgba(255,255,255,0.3); padding-top: 1rem; }
+
+.info-circle {
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    width: 80px;
+    height: 80px;
+    border: 1px solid rgba(255,255,255,0.5);
+    background: transparent;
     color: white;
-    transform: translateY(-3px);
+    border-radius: 50%;
+    font-size: 0.6rem;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.3s;
 }
+.info-circle:hover { background: white; color: black; }
 </style>
