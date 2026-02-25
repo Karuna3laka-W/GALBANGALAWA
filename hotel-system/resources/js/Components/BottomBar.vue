@@ -1,143 +1,164 @@
 <script setup>
-// No heavy logic needed; standard footer visibility via scroll flow.
+// Minimal logic needed for a static footer
 </script>
 
 <template>
-    <footer class="footer-section">
-        <div class="gold-accent-line"></div>
+  <footer class="footer-container">
+    <div class="waves-wrapper">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+      viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(0, 43, 73, 0.7" />
+          <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(0, 43, 73, 0.5)" />
+          <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(0, 43, 73, 0.3)" />
+          <use xlink:href="#gentle-wave" x="48" y="7" fill="#001a2c" />
+        </g>
+      </svg>
+    </div>
 
-        <div class="footer-wrapper">
-            <div class="footer-column">
-                <div class="brand-group">
-                    <span class="brand-tag">Est. 2026</span>
-                    <h4 class="brand-name">Hotel Galbangalawa</h4>
-                </div>
-                <p class="copyright-text">© 2026 Luxury Retreats. All Rights Reserved.</p>
-            </div>
-
-            <div class="footer-column items-center">
-                <div class="contact-grid">
-                    <a href="tel:+94763593988" class="contact-item group">
-                        <div class="icon-circle">
-                            <span class="material-icons-outlined">call</span>
-                        </div>
-                        <div class="contact-info">
-                            <span class="contact-label">Call Us</span>
-                            <span class="contact-value">+94 76 359 3988</span>
-                        </div>
-                    </a>
-                    <a href="mailto:info@galbangalawa.com" class="contact-item group">
-                        <div class="icon-circle">
-                            <span class="material-icons-outlined">mail</span>
-                        </div>
-                        <div class="contact-info">
-                            <span class="contact-label">Email Us</span>
-                            <span class="contact-value">info@galbangalawa.com</span>
-                        </div>
-                    </a>
-                </div>
-            </div>
-
-            <div class="footer-column items-end">
-                <div class="dev-credit group">
-                    <span class="dev-label">Designed & Developed by</span>
-                    <div class="flex items-center gap-3 mt-1">
-                        <a href="https://www.instagram.com/karuna3laka/" target="_blank" class="insta-link">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-                                <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917.3917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.282.11-.705.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
-                            </svg>
-                        </a>
-                        <a href="https://www.instagram.com/karuna3laka/" target="_blank" class="dev-name">
-                            @Karuna3laka
-                            <div class="dev-underline"></div>
-                        </a>
-                    </div>
-                </div>
-            </div>
+    <div class="footer-content">
+      <div class="footer-grid">
+        <div class="footer-column signup-section">
+          <h3 class="column-title">Sign Up for Special Offers</h3>
+          <p class="signup-text">Be the first to know about our luxury escapes and exclusive member rates.</p>
+          <div class="signup-form">
+            <input type="email" placeholder="Email Address" class="signup-input" />
+            <button class="signup-btn">Join</button>
+          </div>
         </div>
-    </footer>
+
+        <div class="footer-column">
+          <h3 class="column-title">Explore</h3>
+          <ul class="footer-links">
+            <li><a href="#">Hotels & Resorts</a></li>
+            <li><a href="#">Offers</a></li>
+            <li><a href="#">Experiences</a></li>
+            <li><a href="#">Weddings & Events</a></li>
+            <li><a href="#">ESG</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Gift Vouchers</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3 class="column-title">Information</h3>
+          <ul class="footer-links">
+            <li><a href="#">Investor Relations</a></li>
+            <li><a href="#">Pressroom</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">U Blog</a></li>
+            <li><a href="#">Site Map</a></li>
+            <li><a href="#">Privacy Statements</a></li>
+            <li><a href="#">Cinnamon Hospitality Academy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">FAQs</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-column">
+          <h3 class="column-title">Get in Touch</h3>
+          <p class="contact-info">Hotel Contact Information</p>
+          <a href="mailto:info@cinnamonhotels.com" class="contact-link">info@cinnamonhotels.com</a>
+          <a href="tel:+94112161161" class="contact-link">+94 112 161 161</a>
+          
+          <div class="social-section">
+            <h3 class="column-title mt-8">Follow Us</h3>
+            <a href="#" class="insta-link">
+               <span class="insta-icon">Instagram</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Hotel Galbangalawa. All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
 </template>
 
 <style scoped>
-.footer-section {
-    @apply relative w-full overflow-hidden;
-    background: #001a2c;
-    padding: 6rem 0 3rem 0;
-    border-top: 1px solid rgba(212, 163, 115, 0.2);
+.footer-container {
+  @apply relative w-full;
+  background-color: #001a2c; /* Navy Blue */
+  color: #ffffff;
+  min-height: 400px;
 }
 
-.gold-accent-line {
-    @apply absolute top-0 left-0 h-[3px] bg-[#d4a373] w-full;
+/* Wavy Animation */
+.waves-wrapper {
+  @apply relative w-full h-[15vh] min-h-[100px] max-h-[150px] overflow-hidden;
 }
 
-.footer-wrapper {
-    @apply max-w-7xl mx-auto px-8 grid grid-cols-1 md:grid-cols-3 gap-12 items-start;
+.waves {
+  @apply relative w-full h-full mb-[-7px]; /* Fix for safari gap */
 }
 
-/* Brand Section */
-.brand-tag {
-    @apply text-[#d4a373] text-[10px] font-black uppercase tracking-[0.4em] block mb-2;
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5) infinite;
+}
+.parallax > use:nth-child(1) { animation-delay: -2s; animation-duration: 7s; }
+.parallax > use:nth-child(2) { animation-delay: -3s; animation-duration: 10s; }
+.parallax > use:nth-child(3) { animation-delay: -4s; animation-duration: 13s; }
+.parallax > use:nth-child(4) { animation-delay: -5s; animation-duration: 20s; }
+
+@keyframes move-forever {
+  0% { transform: translate3d(-90px,0,0); }
+  100% { transform: translate3d(85px,0,0); }
 }
 
-.brand-name {
-    @apply text-white text-2xl font-serif italic font-light;
+/* Layout */
+.footer-content {
+  @apply max-w-7xl mx-auto px-8 pb-12;
 }
 
-.copyright-text {
-    @apply text-gray-500 text-[10px] uppercase tracking-widest mt-3;
+.footer-grid {
+  @apply grid grid-cols-1 md:grid-cols-4 gap-12 pt-10;
 }
 
-/* Contact Grid */
-.contact-grid {
-    @apply flex flex-col gap-6;
+.column-title {
+  @apply text-[#d4a373] text-sm font-bold uppercase tracking-widest mb-6;
 }
 
-.contact-item {
-    @apply flex items-center gap-4 no-underline;
+.footer-links li {
+  @apply mb-3;
 }
 
-.icon-circle {
-    @apply w-12 h-12 rounded-full border border-white/10 flex items-center justify-center 
-           text-[#d4a373] transition-all duration-500 group-hover:bg-[#d4a373] group-hover:text-white;
+.footer-links a {
+  @apply text-gray-300 text-sm no-underline transition-colors duration-300 hover:text-[#d4a373];
 }
 
-.contact-label {
-    @apply text-gray-500 text-[9px] uppercase font-black tracking-widest;
+/* Signup Form */
+.signup-text {
+  @apply text-sm text-gray-400 mb-4;
 }
 
-.contact-value {
-    @apply text-white text-sm font-bold transition-colors group-hover:text-[#d4a373];
+.signup-form {
+  @apply flex items-center border-b border-gray-600 pb-2;
 }
 
-/* Developer Section (@Karuna3laka) */
-.dev-credit {
-    @apply flex flex-col items-end;
+.signup-input {
+  @apply bg-transparent border-none outline-none text-sm w-full text-white placeholder-gray-500;
 }
 
-.dev-label {
-    @apply text-gray-500 text-[9px] uppercase font-black tracking-widest;
+.signup-btn {
+  @apply text-[#d4a373] text-xs font-bold uppercase ml-2 hover:text-white transition-colors;
 }
 
-.insta-link {
-    @apply w-8 h-8 rounded-full border border-white/10 flex items-center justify-center 
-           text-gray-400 transition-all duration-500 hover:text-[#d4a373] hover:border-[#d4a373];
+.contact-link {
+  @apply block text-sm text-gray-300 mb-2 hover:text-[#d4a373];
 }
 
-.dev-name {
-    @apply text-white text-base font-bold no-underline relative pb-1 transition-all duration-500;
+.footer-bottom {
+ @apply border-t border-white/10 mt-16 pt-8 text-center text-xs text-gray-500 uppercase tracking-widest;
 }
 
-.dev-underline {
-    @apply absolute bottom-0 right-0 h-[1px] bg-[#d4a373] w-0 transition-all duration-500;
-}
-
-.dev-name:hover .dev-underline {
-    @apply w-full;
-}
-
+/* Mobile adjustments */
 @media (max-width: 768px) {
-    .footer-wrapper { @apply text-center; }
-    .footer-column { @apply items-center; }
-    .dev-credit { @apply items-center mt-6; }
+  .footer-grid { @apply grid-cols-1 text-center; }
+  .signup-form { @apply justify-center; }
 }
 </style>

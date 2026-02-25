@@ -11,6 +11,14 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Artisan;
+
+
+
+Route::get('/fix-storage', function () {
+    Artisan::call('storage:link');
+    return "Storage link created successfully!";
+});
 
 // 1. Combined Home Route: Sends auth status, packages, Seasonal Offers, AND Services
 Route::get('/', function () {
