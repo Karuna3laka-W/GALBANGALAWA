@@ -15,12 +15,12 @@ const checkAvailability = () => {
 onMounted(() => {
     // The "Water Bubble" Pop-up Animation
     gsap.from(bookingBarRef.value, {
-        y: 80,          // Starts 80px lower (underwater)
-        scale: 0.6,     // Starts smaller
-        opacity: 0,     // Invisible initially
-        duration: 1.8,  // Long duration for that "heavy liquid" feel
-        delay: 0.5,     // Wait 0.5s so the Hero finishes loading first
-        ease: "elastic.out(1, 0.4)", // The magic bounce (Wobbly like a bubble)
+        y: 80,
+        scale: 0.6,
+        opacity: 0,
+        duration: 1.8,
+        delay: 0.5,
+        ease: "elastic.out(1, 0.4)",
         force3D: true
     });
 });
@@ -35,7 +35,7 @@ onMounted(() => {
                     <input v-model="weddingDate" type="date" class="ui-input" />
                 </div>
                 
-                <div class="separator"></div>
+                <div class="separator hide-mobile"></div>
                 
                 <div class="field">
                     <label>Guests</label>
@@ -56,39 +56,36 @@ onMounted(() => {
 </template>
 
 <style scoped>
+/* BASE STYLES (Desktop First) */
 .booking-anchor {
     position: relative;
     width: 100%;
-    /* Increased height to fit the bigger pill */
-    height: 160px; 
+    min-height: 160px; 
     display: flex;
     justify-content: center;
     align-items: center;
     background: transparent;
     z-index: 20;
-    /* Pulls it up more to float nicely between sections */
     margin-top: -80px; 
 }
 
 .booking-container {
     background: white;
-    /* BIGGER PILL: Increased padding top/bottom and left/right */
     padding: 1.5rem 3.5rem; 
     border-radius: 999px;
     display: flex;
     align-items: center;
-    /* More space between the inputs */
     gap: 4rem; 
-    /* Deeper shadow for that "heavy float" look */
     box-shadow: 0 25px 60px -10px rgba(0, 49, 84, 0.25); 
     border: 1px solid rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(12px);
+    width: auto;
 }
 
 .input-stack {
     display: flex;
     align-items: center;
-    gap: 3rem; /* More breathing room between Date and Guests */
+    gap: 3rem;
 }
 
 .field {
@@ -98,7 +95,7 @@ onMounted(() => {
 }
 
 .field label {
-    font-size: 0.7rem; /* Slightly larger label */
+    font-size: 0.7rem;
     text-transform: uppercase;
     font-weight: 900;
     color: #b0b0b0;
@@ -109,24 +106,29 @@ onMounted(() => {
 .ui-input {
     border: none;
     background: none;
-    font-size: 1.1rem; /* Larger text for the actual input */
+    font-size: 1.1rem;
     font-weight: 800;
     outline: none;
     color: #001a2c;
     cursor: pointer;
-    min-width: 140px; /* Ensures they don't look cramped */
+    min-width: 140px;
+    transition: color 0.3s ease;
+}
+
+/* Added Focus State for Accessibility */
+.ui-input:focus {
+    color: #d4a373;
 }
 
 .separator {
     width: 1px;
-    height: 45px; /* Taller divider */
+    height: 45px;
     background: #e5e7eb;
 }
 
 .btn-check {
     background: #003154;
     color: white;
-    /* Larger Button */
     padding: 18px 45px; 
     border-radius: 99px;
     font-size: 0.8rem;
@@ -135,11 +137,57 @@ onMounted(() => {
     letter-spacing: 1.5px;
     transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
     box-shadow: 0 10px 20px rgba(0, 49, 84, 0.2);
+    border: none;
+    cursor: pointer;
 }
 
 .btn-check:hover {
     background: #d4a373;
     transform: translateY(-4px) scale(1.05);
     box-shadow: 0 20px 40px rgba(212, 163, 115, 0.4);
+}
+
+/* RESPONSIVE BREAKPOINT (Mobile/Tablet) */
+@media (max-width: 960px) {
+    .booking-anchor {
+        margin-top: -40px; 
+        padding: 0 1.5rem;
+        height: auto;
+    }
+
+    .booking-container {
+        flex-direction: column;
+        width: 100%;
+        max-width: 450px;
+        gap: 2rem;
+        padding: 2.5rem 2rem;
+        border-radius: 30px; /* Changes from pill to rounded box */
+    }
+
+    .input-stack {
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    .field {
+        align-items: center;
+        width: 100%;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    .ui-input {
+        text-align: center;
+        width: 100%;
+        font-size: 1.2rem;
+    }
+
+    .btn-check {
+        width: 100%;
+        padding: 20px;
+    }
 }
 </style>
