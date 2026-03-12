@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\SeasonalOfferController;
-use App\Http\Controllers\Admin\ServiceController; // <-- Added Service Controller
+use App\Http\Controllers\Admin\ServiceController;
 use App\Models\Package;
+use App\Models\Reservation;
 use App\Models\SeasonalOffer;
-use App\Models\Service; // <-- Added Service Model
+use App\Models\Service;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -39,7 +41,18 @@ Route::get('/', function () {
     ]);
 });
 
-// 2. Wedding Inquiry Details Page
+// 2. Booking Page
+Route::get('/booking', function () {
+    return Inertia::render('Booking', [
+        'packages' => Package::where('is_active', true)->latest()->get(),
+        'services' => Service::where('is_active', true)->latest()->get(),
+    ]);
+})->name('booking');
+
+// Store reservation (public route — no auth required)
+Route::post('/booking', [ReservationController::class, 'store'])->name('reservation.store');
+
+// 3. Wedding Inquiry Details Page
 Route::get('/inquiry-details', function (Request $request) {
     return Inertia::render('InquiryDetails', [
         'selectedDate' => $request->query('date'),
@@ -55,7 +68,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Admin/Dashboard', [
             'packages' => Package::latest()->get(),
             'seasonalOffers' => SeasonalOffer::latest()->get(),
-            'services' => Service::latest()->get(), // <-- Added Services to Dashboard
+            'services' => Service::latest()->get(),
+            'reservations' => Reservation::with('package')->latest()->get(),
         ]);
     })->name('dashboard');
 
@@ -74,6 +88,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // NOTE: Inertia file uploads require a POST route even for updating, we use _method=PUT on the frontend
     Route::post('/admin/services/{service}', [ServiceController::class, 'update'])->name('admin.services.update'); 
     Route::delete('/admin/services/{service}', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
+
+    // Reservation Management
+    Route::put('/admin/reservations/{reservation}/status', [ReservationController::class, 'updateStatus'])->name('admin.reservations.status');
+    Route::delete('/admin/reservations/{reservation}', [ReservationController::class, 'destroy'])->name('admin.reservations.destroy');
 });
 
 // 4. User Profile Routes (Breeze defaults)
